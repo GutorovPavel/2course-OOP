@@ -1,0 +1,48 @@
+{% extends 'bankapp/base.html' %}
+
+{% load static %}
+
+{% block css_add %}
+    <link rel="stylesheet" href="{% static 'bankapp/css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+    <p></p>
+    <h1 class="text-center pb-5 mt-5">{{title}}</h1>
+
+<!--    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline"-->
+    <form method="POST">
+        {% csrf_token %}
+<!--        <div class="mb-3">-->
+<!--            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" name="username" required placeholder="Username">-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" name="first_name" required placeholder="First Name">-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" name="last_name" required placeholder="Last Name">-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" type="email" name="email" required placeholder="Email">-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" name="phone" required placeholder="Phone">-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" name="passport_number" required placeholder="Passport Number">-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" type="password" name="password1" required placeholder="Password">-->
+<!--        </div>-->
+<!--        <div class="mb-4">-->
+<!--            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" type="password" name="password2" required placeholder="Confirm Password">-->
+<!--        </div>-->
+        {{form.as_p}}
+        <div class="mb-4">
+            {% for message in messages %}
+                {{message}}
+            {% endfor %}
+        </div>
+        <button class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Submit</button>
+    </form>
+{% endblock %}

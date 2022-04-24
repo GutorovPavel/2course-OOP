@@ -1,0 +1,50 @@
+{% extends 'bankapp/base.html' %}
+
+{% load static %}
+
+{% block css_add %}
+    <link rel="stylesheet" href="{% static 'bankapp/css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if request.user.role == 'Client' %}
+    <h1 class="text-center pb-5 mt-5">{{ title }}</h1>
+    <div class="mt-2">
+        <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            {% csrf_token %}
+
+            {{form.as_p}}
+            <div class="mb-4">
+                {% for message in messages %}
+                    {{message}}
+                {% endfor %}
+            </div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Submit</button>
+        </form>
+    </div>
+{% elif request.user.role == 'Operator' %}
+    <div class="shadow card card-body">
+        <h4 class="text-center">Deposits: </h4>
+        </div>
+    <div class="shadow card card-body">
+        <table class="table-sm">
+            <tr>
+                <th>Username</th>
+                <th>Sum</th>
+                <th>Bank</th>
+                <th>Months</th>
+                <th>Interest rate</th>
+            </tr>
+            {% for d in deposits %}
+                <tr>
+                    <th>{{d.user.username}}</th>
+                    <th>{{d.amount}} $</th>
+                    <th>{{d.bank}}</th>
+                    <th>{{d.months}}</th>
+                    <th>{{d.interest_rate}} %</th>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endif %}
+{% endblock %}

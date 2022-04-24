@@ -1,0 +1,24 @@
+{% extends 'bankapp/base.html' %}
+
+{% load static %}
+
+{% block css_add %}
+    <link rel="stylesheet" href="{% static 'bankapp/css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center pb-5 mt-5">{{ title }}</h1>
+<div class="mt-2">
+    <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        {% csrf_token %}
+
+        {{form.as_p}}
+        <div class="mb-4">
+            {% for message in messages %}
+                {{message}}
+            {% endfor %}
+        </div>
+        <button class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

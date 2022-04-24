@@ -1,0 +1,112 @@
+{% extends 'bankapp/base.html' %}
+
+{% block content %}
+    <h5 class="text-center mt-5 pb-4">Welcome! You are working with Bank System by VISSHIISORT! ({{request.user.role}})</h5>
+    <div class="row">
+        <div class="shadow col-md">
+            {% if request.user.role == 'Operator' %}
+                <div class="shadow card card-body">
+                    <h4 class="text-center">Clients: </h4>
+                </div>
+                <div class="card card-body">
+                    <table class="table-sm">
+                        <tr>
+                            <th>Username</th>
+                            <th>Full Name</th>
+                            <th>Balance</th>
+                        </tr>
+                        {% for a in accounts %}
+                            <tr>
+                                <th>{{a.user.username}}</th>
+                                <th>{{a.user.get_full_name}}</th>
+                                <th>{{a.amount|default:0}} $</th>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% else %}
+                <div class="shadow">
+                    <h3 class="text-center pt-2 mb-4">{{request.user.get_full_name}} Information:</h3>
+                    <h5 class="text-center pb-3">Balance: {{user_account.amount}} $</h5>
+                </div>
+                <p></p>
+                <div class="card">
+                    <table>
+                        <tr class="text-center">
+                            <th>
+                                <div class="card card-body">
+                                    <h4 class="text-center">Deposits: </h4>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="card card-body">
+                                    <h4 class="text-center">Credits: </h4>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div>
+                                <table class="table-sm">
+                                    <tr>
+                                        <th>Sum</th>
+                                        <th>Bank</th>
+                                        <th>Months</th>
+                                        <th>Interest rate</th>
+                                    </tr>
+                                    {% for d in deposits %}
+                                        <tr>
+                                            <th>{{d.amount}} $</th>
+                                            <th>{{d.bank}}</th>
+                                            <th>{{d.months}}</th>
+                                            <th>{{d.interest_rate}} %</th>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                                </div>
+                            </th>
+                            <th>
+                                <div>
+                                <table class="table-sm">
+                                    <tr>
+                                        <th>Sum</th>
+                                        <th>Bank</th>
+                                        <th>Months</th>
+                                        <th>Interest rate</th>
+                                    </tr>
+                                    {% for c in credits %}
+                                        <tr>
+                                            <th>{{c.amount}} $</th>
+                                            <th>{{c.bank}}</th>
+                                            <th>{{c.months}}</th>
+                                            <th>{{c.interest_rate}} %</th>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                                </div>
+                            </th>
+                        </tr>
+                    </table>
+                <div class="card card-body">
+                    <h4 class="text-center">Installments: </h4>
+                </div>
+                    <table class="table-sm">
+                        <tr>
+                            <th>Sum</th>
+                            <th>Company</th>
+                            <th>Bank</th>
+                            <th>Months</th>
+                        </tr>
+                        {% for i in installments %}
+                            <tr>
+                                <th>{{i.amount}} $</th>
+                                <th>{{i.company}}</th>
+                                <th>{{i.bank}}</th>
+                                <th>{{i.months}}</th>
+                            </tr>
+                        {% endfor %}
+                    </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
